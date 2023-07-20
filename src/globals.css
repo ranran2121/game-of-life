@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  padding: 20px;
+  background-color: #444;
+}
+
+.main {
+  @apply min-h-screen flex flex-col items-center justify-center;
+}
+
+#gridContainer {
+  @apply pb-4;
+}
+
+table {
+  background-color: #c5d6c6;
+  border-spacing: 0;
+}
+
+td {
+  border: 1px solid #f1f5da;
+  border-radius: 3px;
+  width: 10px;
+  height: 10px;
+}
+
+#start,
+#clear,
+#seed {
+  padding: 0.75em;
+  border-radius: 5px;
+  border: none;
+  background: linear-gradient(to bottom right, #c5dec6, #587559);
+}
+
+.controls {
+  @apply w-[30%] flex flex-row justify-evenly mx-auto;
+}
