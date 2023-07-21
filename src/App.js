@@ -1,26 +1,47 @@
 import "./globals.css";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { seedArray, buildArray, applyGameOfLife } from "./utils/index.js";
 
 const arr = buildArray();
+let timer = "";
 
 function App() {
   const [array, setArray] = useState(arr);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [hasSeed, setHasSeed] = useState(false);
 
   const handleSeed = useCallback(() => {
     const newArr = seedArray([...array]);
     setArray(newArr);
+    setHasSeed(true);
   }, [array]);
 
   const handleClear = useCallback(() => {
+    clearTimeout(timer);
+    setIsPlaying(false);
+    setHasSeed(false);
     const newArr = buildArray([...array]);
     setArray(newArr);
   }, [array]);
 
-  const handlePlay = useCallback(() => {
-    const nextState = applyGameOfLife([...array]);
-    setArray([...nextState]);
-  }, [array]);
+  const handlePlay = () => {
+    if (hasSeed) {
+      setIsPlaying(!isPlaying);
+    } else {
+      alert("Please initialize the grid");
+    }
+  };
+
+  useEffect(() => {
+    if (isPlaying) {
+      timer = setTimeout(() => {
+        const nextState = applyGameOfLife([...array]);
+        setArray([...nextState]);
+      }, 1000);
+    } else {
+      clearTimeout(timer);
+    }
+  }, [array, isPlaying]);
 
   return (
     <div className="main">
@@ -38,7 +59,7 @@ function App() {
                         <td
                           key={j}
                           className="w-4 h-4"
-                          style={{ backgroundColor: "red" }}
+                          style={{ backgroundColor: "#7312a1" }}
                         ></td>
                       );
                   })}
@@ -51,7 +72,7 @@ function App() {
 
       <div className="controls">
         <button id="start" onClick={handlePlay}>
-          Next
+          {isPlaying ? "Pause" : "Play"}
         </button>
         <button id="clear" onClick={handleClear}>
           Clear

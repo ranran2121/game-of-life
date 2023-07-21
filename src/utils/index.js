@@ -60,9 +60,7 @@ export const calcNeighbors = (arr, i, j) => {
 
 export const applyGameOfLife = (arr) => {
   let nextState = buildArray();
-  console.log("ARR", arr);
   const padded = padArray(arr);
-  //console.log("P", padded);
 
   for (let i = 1; i < padded.length - 1; i++) {
     for (let j = 1; j < padded[0].length - 1; j++) {
@@ -76,7 +74,6 @@ export const applyGameOfLife = (arr) => {
       }
     }
   }
-  console.log("NSS", nextState);
 
   return nextState;
 };
