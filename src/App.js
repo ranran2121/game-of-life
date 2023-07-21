@@ -37,7 +37,7 @@ function App() {
       timer = setTimeout(() => {
         const nextState = applyGameOfLife([...array]);
         setArray([...nextState]);
-      }, 1000);
+      }, 300);
     } else {
       clearTimeout(timer);
     }
