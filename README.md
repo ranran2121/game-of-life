@@ -8,7 +8,13 @@
 nvm use 18
 ```
 
-3.Start the app:
+3.Install dependencies:
+
+```bash
+npm install
+```
+
+4.Start the app:
 
 ```bash
 npm start
