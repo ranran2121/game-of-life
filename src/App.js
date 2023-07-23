@@ -20,9 +20,9 @@ function App() {
     clearTimeout(timer);
     setIsPlaying(false);
     setHasSeed(false);
-    const newArr = buildArray([...array]);
+    const newArr = buildArray();
     setArray(newArr);
-  }, [array]);
+  }, []);
 
   const handlePlay = () => {
     if (hasSeed) {
