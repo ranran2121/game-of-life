@@ -1,7 +1,8 @@
-export const buildArray = () => {
-  const rows = 45;
-  const cols = 100;
+export const ROWS = 45;
+export const COLS = 100;
+export const SPEED = 300;
 
+export const buildArray = (rows, cols) => {
   const arr = [];
   for (let i = 0; i < rows; i++) {
     let row = [];
@@ -58,8 +59,8 @@ export const calcNeighbors = (arr, i, j) => {
   return total;
 };
 
-export const applyGameOfLife = (arr) => {
-  let nextState = buildArray();
+export const applyGameOfLife = (arr, rows, cols) => {
+  let nextState = buildArray(rows, cols);
   const padded = padArray(arr);
 
   for (let i = 1; i < padded.length - 1; i++) {
