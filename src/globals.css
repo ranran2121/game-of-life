@@ -53,3 +53,17 @@ td {
 .controls {
   @apply w-[30%] flex flex-row justify-evenly mx-auto;
 }
+
+.console {
+  @apply w-[50%] flex flex-row justify-evenly mx-auto mt-4;
+}
+
+.console-line {
+}
+
+label {
+  @apply text-white mr-2;
+}
+input {
+  @apply rounded-md text-right;
+}
