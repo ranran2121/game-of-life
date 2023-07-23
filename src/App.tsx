@@ -7,31 +7,33 @@ import {
   ROWS,
   COLS,
   SPEED,
-} from "./utils/index.js";
+} from "./utils/index";
 
 const arr = buildArray(ROWS, COLS);
-let timer = "";
+let timer: any = "";
 
 function App() {
   const [array, setArray] = useState(arr);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
   const [hasSeed, setHasSeed] = useState(false);
   const [rows, setRows] = useState(ROWS);
   const [cols, setCols] = useState(COLS);
   const [speed, setSpeed] = useState(SPEED);
 
   const handleSeed = useCallback(() => {
-    if (!isPlaying) {
+    if (!isPlaying && !hasStarted) {
       const newArr = seedArray([...array]);
       setArray(newArr);
       setHasSeed(true);
     }
-  }, [array, isPlaying]);
+  }, [array, hasStarted, isPlaying]);
 
   const handleClear = useCallback(() => {
     clearTimeout(timer);
     setIsPlaying(false);
     setHasSeed(false);
+    setHasStarted(false);
     const newArr = buildArray(ROWS, COLS);
     setArray(newArr);
   }, []);
@@ -56,9 +58,11 @@ function App() {
   }, [array, cols, isPlaying, rows, speed]);
 
   useEffect(() => {
-    const arr = buildArray(rows, cols);
-    setArray(arr);
-  }, [rows, cols]);
+    if (!hasStarted) {
+      const arr = buildArray(rows, cols);
+      setArray(arr);
+    }
+  }, [rows, cols, hasStarted]);
 
   return (
     <div className="main">
@@ -107,11 +111,11 @@ function App() {
             type="number"
             min="10"
             max="100"
-            steps="1"
+            step="1"
             value={rows}
             onChange={(e) => {
-              if (!isPlaying) {
-                setRows(e.target.value);
+              if (!isPlaying && !hasStarted && !hasSeed) {
+                setRows(Number(e.target.value));
               }
             }}
           />
@@ -123,11 +127,11 @@ function App() {
             type="number"
             min="10"
             max="100"
-            steps="1"
+            step="1"
             value={cols}
             onChange={(e) => {
-              if (!isPlaying) {
-                setCols(e.target.value);
+              if (!isPlaying && !hasStarted && !hasSeed) {
+                setCols(Number(e.target.value));
               }
             }}
           />
@@ -139,11 +143,11 @@ function App() {
             type="number"
             min="200"
             max="2000"
-            steps="1"
+            step="1"
             value={speed}
             onChange={(e) => {
-              if (!isPlaying) {
-                setSpeed(e.target.value);
+              if (!isPlaying && !hasStarted && !hasSeed) {
+                setSpeed(Number(e.target.value));
               }
             }}
           />
