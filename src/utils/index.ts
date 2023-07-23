@@ -1,10 +1,11 @@
-export const buildArray = () => {
-  const rows = 45;
-  const cols = 100;
+export const ROWS = 45;
+export const COLS = 100;
+export const SPEED = 300;
 
-  const arr = [];
+export const buildArray = (rows: number, cols: number) => {
+  const arr: number[][] = [];
   for (let i = 0; i < rows; i++) {
-    let row = [];
+    let row: number[] = [];
     for (let j = 0; j < cols; j++) {
       row.push(0);
     }
@@ -13,10 +14,10 @@ export const buildArray = () => {
   return arr;
 };
 
-export const seedArray = (arr) => {
-  const newArr = [];
+export const seedArray = (arr: number[][]) => {
+  const newArr: number[][] = [];
   for (let i = 0; i < arr.length; i++) {
-    let row = [];
+    let row: number[] = [];
 
     for (let j = 0; j < arr[0].length; j++) {
       const n = Math.floor(Math.random() * 2);
@@ -29,8 +30,8 @@ export const seedArray = (arr) => {
   return newArr;
 };
 
-export const padArray = (arr) => {
-  let paddingRow = [];
+export const padArray = (arr: number[][]) => {
+  let paddingRow: number[] = [];
   for (let j = 0; j < arr[0].length + 2; j++) {
     paddingRow.push(0);
   }
@@ -44,7 +45,7 @@ export const padArray = (arr) => {
   return arr;
 };
 
-export const calcNeighbors = (arr, i, j) => {
+export const calcNeighbors = (arr: any[], i: number, j: number) => {
   let total = 0;
   total += arr[i - 1][j];
   total += arr[i + 1][j];
@@ -58,15 +59,13 @@ export const calcNeighbors = (arr, i, j) => {
   return total;
 };
 
-export const applyGameOfLife = (arr) => {
-  let nextState = buildArray();
-  console.log("ARR", arr);
+export const applyGameOfLife = (arr: any, rows: number, cols: number) => {
+  let nextState: number[][] = buildArray(rows, cols);
   const padded = padArray(arr);
-  //console.log("P", padded);
 
   for (let i = 1; i < padded.length - 1; i++) {
     for (let j = 1; j < padded[0].length - 1; j++) {
-      const neighbours = calcNeighbors(padded, i, j);
+      const neighbours: number = calcNeighbors(padded, i, j);
       if (neighbours <= 3 && neighbours >= 2 && padded[i][j] === 1) {
         nextState[i - 1][j - 1] = 1;
       } else if (neighbours === 3 && padded[i][j] === 0) {
@@ -76,7 +75,6 @@ export const applyGameOfLife = (arr) => {
       }
     }
   }
-  console.log("NSS", nextState);
 
   return nextState;
 };

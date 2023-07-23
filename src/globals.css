@@ -4,7 +4,7 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
+  --background-start-rgb: 213, 206, 219;
   --background-end-rgb: 255, 255, 255;
 }
 
@@ -30,12 +30,12 @@ body {
 }
 
 table {
-  background-color: #c5d6c6;
+  background-color: #cdc5d6;
   border-spacing: 0;
 }
 
 td {
-  border: 1px solid #f1f5da;
+  border: 1px solid #e8daf5;
   border-radius: 3px;
   width: 10px;
   height: 10px;
@@ -47,9 +47,23 @@ td {
   padding: 0.75em;
   border-radius: 5px;
   border: none;
-  background: linear-gradient(to bottom right, #c5dec6, #587559);
+  background: linear-gradient(to bottom right, #d6c5de, #6c5875);
 }
 
 .controls {
   @apply w-[30%] flex flex-row justify-evenly mx-auto;
+}
+
+.console {
+  @apply w-[50%] flex flex-row justify-evenly mx-auto mt-4;
+}
+
+.console-line {
+}
+
+label {
+  @apply text-white mr-2;
+}
+input {
+  @apply rounded-md text-right;
 }
