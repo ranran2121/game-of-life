@@ -34,6 +34,8 @@ function App() {
     setIsPlaying(false);
     setHasSeed(false);
     setHasStarted(false);
+    setCols(COLS);
+    setRows(ROWS);
     const newArr = buildArray(ROWS, COLS);
     setArray(newArr);
   }, []);
